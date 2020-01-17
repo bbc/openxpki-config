@@ -216,6 +216,7 @@ keyUsage                = critical, digitalSignature, keyEncipherment
 extendedKeyUsage        = serverAuth, clientAuth
 basicConstraints        = critical,CA:FALSE
 subjectAltName		= DNS:${WEB_SERVER_FQDN}
+subjectAltName		= DNS:localhost
 #crlDistributionPoints	= ${ISSUING_REVOCATION_URI}
 #authorityInfoAccess	= caIssuers;${ISSUING_CERTIFICATE_URI}
 " > "${OPENSSL_CONF}"
