@@ -19,7 +19,7 @@ policy:
     # options below.
 
     # if set requests can be authenticated by an operator
-    allow_man_authen: 1
+    allow_man_authen: 0
 
     # if set, no authentication is required at all and hmac/challenge is
     # not evaluated even if it is set/present in the request!
@@ -57,7 +57,7 @@ policy:
     export_certificate: chain
 
 profile:
-    cert_profile: tls_client
+    cert_profile: tls_server_client
     cert_subject_style: 00_basic_style
 
 # Mapping of names to OpenXPKI profiles to be used with the
