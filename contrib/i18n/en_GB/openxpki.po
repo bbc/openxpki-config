@@ -1044,6 +1044,9 @@ msgstr "TLS Client"
 msgid "I18N_OPENXPKI_UI_PROFILE_TLS_SERVER_LABEL"
 msgstr "TLS/Web Server "
 
+msgid "I18N_OPENXPKI_UI_PROFILE_TLS_NMOS_LABEL"
+msgstr "TLS/NMOS Web Server "
+
 msgid "I18N_OPENXPKI_UI_PROFILE_UNABLE_TO_GENERATE_PASSWORD_DESC"
 msgstr ""
 "An error occured while generating a new password for you. Please reload the "

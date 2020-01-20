@@ -1,6 +1,6 @@
 # The name of the file equals the name of the profile
 
-label: I18N_OPENXPKI_UI_PROFILE_TLS_CLIENT_LABEL
+label: I18N_OPENXPKI_UI_PROFILE_TLS_NMOS_LABEL
 
 validity:
     notafter: +01
@@ -10,7 +10,7 @@ style:
         label: I18N_OPENXPKI_UI_PROFILE_NOMS_STYLE_LABEL
         description: I18N_OPENXPKI_UI_PROFILE_NMOS_STYLE_DESC
         subject:
-            dn: CN=[% CN.0 %],DC=Test Deployment,DC=OpenXPKI,DC=org
+            dn: CN=[% CN.0 %],DC=AMWA Workshop
             san:
                 dns: "[% FOREACH entry = SAN_DNS %][% entry.lower %] | [% END %]"
 
