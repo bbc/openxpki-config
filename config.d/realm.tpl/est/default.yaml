@@ -21,23 +21,23 @@ policy:
     # options below.
 
     # if set requests can be authenticated by an operator
-    allow_man_authen: 0
+    allow_man_authen: 1
 
     # if set, no authentication is required at all and hmac/challenge is
     # not evaluated even if it is set/present in the request!
-    allow_anon_enroll: 1
+    allow_anon_enroll: 0
 
     # Approval
     # If not autoapproved, allow opeerator to add approval by hand
     allow_man_approv: 1
 
-    # if the eligibiliyt check failed the first time
+    # if the eligibility check failed the first time
     # show a button to run a recheck (Workflow goes to PENDING)
     allow_eligibility_recheck: 1
 
     # Approval points required (eligibity and operator count as one point each)
     # if you set this to "0", all authenticated requests are auto-approved!
-    approval_points: 0
+    approval_points: 1
 
     # The number of active certs with the same subject that are allowed
     # to exist at the same time, deducted by one if a renewal is seen
