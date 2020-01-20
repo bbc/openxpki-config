@@ -7,6 +7,8 @@ authorized_signer:
     rule2:
         # Full DN
         subject: CN=.+:pkiclient,.*
+    rule3:
+        identifier: AhElV5GzgFhKalmF_yQq-b1TnWg
 
 renewal_period: 000060
 
@@ -57,8 +59,8 @@ policy:
     export_certificate: chain
 
 profile:
-    cert_profile: tls_server_client
-    cert_subject_style: 00_basic_style
+    cert_profile: tls_nmos
+    cert_subject_style: enroll
 
 # Mapping of names to OpenXPKI profiles to be used with the
 # Microsoft Certificate Template Name Ext. (1.3.6.1.4.1.311.20.2)

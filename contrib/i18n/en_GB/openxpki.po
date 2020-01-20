@@ -855,8 +855,15 @@ msgstr ""
 "The default style is usually the best choice if you do not have any special "
 "requirements."
 
+msgid "I18N_OPENXPKI_UI_PROFILE_NMOS_STYLE_DESC"
+msgstr ""
+"The NMOS profile should be used for all NMOS Nodes."
+
 msgid "I18N_OPENXPKI_UI_PROFILE_BASIC_STYLE_LABEL"
 msgstr "Default profile style"
+
+msgid "I18N_OPENXPKI_UI_PROFILE_NMOS_STYLE_LABEL"
+msgstr "NMOS profile style"
 
 msgid "I18N_OPENXPKI_UI_PROFILE_CHOOSE_PROFILE_FIRST"
 msgstr "Please select profile first"
