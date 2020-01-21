@@ -28,14 +28,14 @@ policy:
     allow_anon_enroll: 0
 
     # Approval
-    # If not autoapproved, allow opeerator to add approval by hand
+    # If not autoapproved, allow operator to add approval by hand
     allow_man_approv: 1
 
     # if the eligibility check failed the first time
     # show a button to run a recheck (Workflow goes to PENDING)
     allow_eligibility_recheck: 1
 
-    # Approval points required (eligibity and operator count as one point each)
+    # Approval points required (eligibility and operator count as one point each)
     # if you set this to "0", all authenticated requests are auto-approved!
     approval_points: 1
 
@@ -47,7 +47,7 @@ policy:
     # option will be removed
     # allow_expired_signer: 0
 
-    # If an initial enrollment is seen
+    # If an initial enrolment is seen
     # all existing certificates with the same subject are revoked
     auto_revoke_existing_certs: 1
 
