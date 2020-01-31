@@ -2,13 +2,23 @@ label: Enrollment
 
 authorized_signer:
     rule1:
-        # Full DN
-        subject: CN=.+:estclient,.*
-    rule2:
-        # Full DN
-        subject: CN=.+:pkiclient,.*
+        # Manufacturer Root CA
+        identifier: VKIBAbQtFyqCur1UvfPINV0lCY8
     rule3:
-        identifier: AhElV5GzgFhKalmF_yQq-b1TnWg
+        root_alias: trustgroup1
+    rule5:
+        # Client Cert
+        identifier: YVM0RCvdXQUaaEU1yYse0z960VM
+    rule6:
+        # OpenXPKI CA for this realm
+        identifier: IkSn0aCjCjQAq41oEO2pQVf4b30
+    rule7:
+        issuer_alias: trustgroup1
+    rule8:
+        realm: democa
+    rule9:
+        identifier: V5hNR1Rgqw9kTNsIYgttvDDZflM
+
 
 renewal_period: 000060
 
