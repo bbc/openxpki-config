@@ -116,7 +116,7 @@ state:
     START_ONBEHALF:
         autorun: 1
         action:
-          - global_set_error_signer_not_authorized > MANUAL_AUTHORIZATION ? !global_is_signer_authorized !global_is_signer_revoked
+          - global_set_error_signer_not_authorized > AUTHORIZED ? !global_is_signer_authorized !global_is_signer_revoked
           - global_set_error_signer_expired > FAILURE ? global_is_signer_authorized !global_is_signer_revoked !global_is_signer_validity_ok
           - global_set_error_signer_revoked > FAILURE ? global_is_signer_revoked global_is_signer_validity_ok
           - global_noop > AUTHORIZED ? global_is_signer_authorized !global_is_signer_revoked global_is_signer_validity_ok
