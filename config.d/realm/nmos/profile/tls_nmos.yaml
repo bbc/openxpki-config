@@ -1,0 +1,66 @@
+# The name of the file equals the name of the profile
+
+label: I18N_OPENXPKI_UI_PROFILE_TLS_NMOS_LABEL
+
+validity:
+    notafter: +01
+
+style:
+    enroll:
+        label: I18N_OPENXPKI_UI_PROFILE_NOMS_STYLE_LABEL
+        description: I18N_OPENXPKI_UI_PROFILE_NMOS_STYLE_DESC
+        subject:
+            dn: CN=[% CN.0 %],DC=AMWA Workshop
+            san:
+                dns: "[% FOREACH entry = SAN_DNS %][% entry.lower %] | [% END %]"
+
+        metadata:
+            system_id: "[% data.cust_id %]"
+            server_id: "[% data.server_id %]"
+            entity: "[% CN.0 FILTER lower %]"
+
+
+# Profile extensions - set 0/1 as needed
+extensions:
+    key_usage:
+        critical:          1
+        digital_signature: 1
+        non_repudiation:   0
+        key_encipherment:  0
+        data_encipherment: 0
+        key_agreement:     0
+        key_cert_sign:     0
+        crl_sign:          0
+        encipher_only:     0
+        decipher_only:     0
+
+    extended_key_usage:
+        critical:         1
+        client_auth:      1
+        server_auth:      1
+        email_protection: 0
+        code_signing:     0
+        time_stamping:    0
+        ocsp_signing:     0
+
+    # This is really outdated and should not be used unless really necessary
+    netscape:
+        comment:
+            critical: 0
+            text: This is a generic certificate. Generated with OpenXPKI trustcenter software.
+
+        certificate_type:
+            critical: 0
+            ssl_client:        0
+            smime_client:      0
+            object_signing:    0
+            ssl_client_ca:     0
+            smime_client_ca:   0
+            object_signing_ca: 0
+
+        cdp:
+            critical: 0
+            uri: http://localhost/cacrl.crt
+            ca_uri: http://localhost/cacrl.crt
+     # end of netscape section
+

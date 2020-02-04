@@ -1,0 +1,88 @@
+label: Enrollment
+
+authorized_signer:
+    rule1:
+        # Manufacturer Root CA
+        identifier: VKIBAbQtFyqCur1UvfPINV0lCY8
+    rule3:
+        root_alias: trustgroup1
+    rule5:
+        # Client Cert
+        identifier: YVM0RCvdXQUaaEU1yYse0z960VM
+    rule6:
+        # OpenXPKI CA for this realm
+        identifier: IkSn0aCjCjQAq41oEO2pQVf4b30
+    rule7:
+        issuer_alias: trustgroup1
+    rule8:
+        realm: nmos
+    rule9:
+        identifier: V5hNR1Rgqw9kTNsIYgttvDDZflM
+
+
+renewal_period: 000060
+
+# You must set at least one of both options or remove the is_policy_loaded
+# condition in the workflow definition
+policy:
+    # Authentication Options
+    # Initial requests need ONE authentication.
+    # Activate Challenge Password and/or HMAC by setting the appropriate
+    # options below.
+
+    # if set requests can be authenticated by an operator
+    allow_man_authen: 1
+
+    # if set, no authentication is required at all and hmac/challenge is
+    # not evaluated even if it is set/present in the request!
+    allow_anon_enroll: 0
+
+    # Approval
+    # If not autoapproved, allow operator to add approval by hand
+    allow_man_approv: 1
+
+    # if the eligibility check failed the first time
+    # show a button to run a recheck (Workflow goes to PENDING)
+    allow_eligibility_recheck: 1
+
+    # Approval points required (eligibility and operator count as one point each)
+    # if you set this to "0", all authenticated requests are auto-approved!
+    approval_points: 1
+
+    # The number of active certs with the same subject that are allowed
+    # to exist at the same time, deducted by one if a renewal is seen
+    # set to 0 if you dont want to check for duplicates at all
+    max_active_certs: 1
+
+    # option will be removed
+    # allow_expired_signer: 0
+
+    # If an initial enrolment is seen
+    # all existing certificates with the same subject are revoked
+    auto_revoke_existing_certs: 1
+
+    # allows a "renewal" outside the renewal window, the notafter date
+    # is aligned to the old certificate. Set revoke_on_replace option
+    # to revoke the replaced certificate.
+    # This substitutes the "replace_window" from the OpenXPKI v1 config
+    allow_replace: 1
+    export_certificate: chain
+
+profile:
+    cert_profile: tls_nmos
+    cert_subject_style: enroll
+
+# Mapping of names to OpenXPKI profiles to be used with the
+# Microsoft Certificate Template Name Ext. (1.3.6.1.4.1.311.20.2)
+# profile_map:
+#     pc-client: tls_client
+
+eligible:
+    initial:
+        value: 1
+
+    renewal:
+        value: 1
+
+    onbehalf:
+       value: 1

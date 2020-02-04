@@ -4,3 +4,7 @@
 democa:
     label: Example.org Demo CA
     baseurl: https://pki.example.com/openxpki/
+
+nmos:
+    label: NMOS Workshop CA
+    baseurl: https://workshop.nmos.tv/
