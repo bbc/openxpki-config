@@ -1,1 +1,6 @@
-ca/
+*.crt
+*.key
+*.pass
+*.pem
+*.csr
+*.openssl/
