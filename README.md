@@ -4,6 +4,11 @@ This directory contains a minimum and complete configuration set to run
 a OpenXPKI instance using the WebUI. All contents need to be copied to
 /etc/openxpki/.
 
+
+## Usage
+
+An example instance of OpenXPKI for usage with NMOS devices can be setup by following [this guide](nmos-docker-setup.md)
+
 ## Log configuration (log.conf)
 
 OpenXPKI uses Log4perl for its logging system. The location of the
@@ -19,12 +24,12 @@ as is on most systems, minimal action: configure your database.
 
 ## realm configuration (config.d/realm/)
 
-A single OpenXPKI instance can be used to run more than one logical 
+A single OpenXPKI instance can be used to run more than one logical
 certification authority - we call this a "realm". A fully working config
 can be found in realm.tpl, to setup a working CA either make a copy of this
 directory or just create a symlink to it from inside the `realm` directory
-and put the name of the realm in the file system/realms.yaml. 
+and put the name of the realm in the file system/realms.yaml.
 
-A demo realm named "democa" is part of the repository. It is recommended to 
+A demo realm named "democa" is part of the repository. It is recommended to
 not use this for a production system.
 
