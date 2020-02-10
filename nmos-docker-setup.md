@@ -101,6 +101,10 @@ sudo docker-compose restart
 
 **Adding Externally Trusted CA, for Client verification**
 1. Append certificates to the `openxpki-config/externallyTrustedCAs/external.ca.certs.pem`
+2. Restart `openxpki-client` for changes to be imported
+```
+sudo docker-compose restart openxpki-client
+```
 
 
 **Bug fixes, should be fixed when docker image updated**
