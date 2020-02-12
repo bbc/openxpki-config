@@ -36,20 +36,19 @@ ln -s OpenXPKI_Issuing_CA.key ca-signer-1.pem
 ```
 7. The directory `openxpki-config/ca/nmos/` should look like this
 ```
--r--r--r--  1 jamesg  BBCRD\Domain Users  1870  4 Feb 13:33 OpenXPKI_DataVault.crt
--r--r-----  1 jamesg  BBCRD\Domain Users  3414  4 Feb 13:33 OpenXPKI_DataVault.key
--r--------  1 jamesg  BBCRD\Domain Users     4  4 Feb 13:33 OpenXPKI_DataVault.pass
--rwxrwxrwx  1 jamesg  BBCRD\Domain Users  1996 27 Jan 09:07 OpenXPKI_Issuing_CA.crt
--rw-r--r--  1 jamesg  BBCRD\Domain Users  3326  4 Feb 15:48 OpenXPKI_Issuing_CA.key
--r--------  1 jamesg  BBCRD\Domain Users     4  4 Feb 15:47 OpenXPKI_Issuing_CA.pass
--rwxrwxrwx  1 jamesg  BBCRD\Domain Users  2000 27 Jan 09:07 OpenXPKI_Root_CA.crt
--rw-r--r--  1 jamesg  BBCRD\Domain Users  3326  4 Feb 15:47 OpenXPKI_Root_CA.key
--r--------  1 jamesg  BBCRD\Domain Users     4  4 Feb 15:47 OpenXPKI_Root_CA.pass
--rw-r--r--  1 jamesg  BBCRD\Domain Users    74  6 Feb 09:01 README.md
-lrwxrwxrwx  1 jamesg  BBCRD\Domain Users    45  4 Feb 15:55 ca-signer-1.pem -> OpenXPKI_Issuing_CA.key
+-r--r--r--  1 OpenXPKI_DataVault.crt
+-r--r-----  1 OpenXPKI_DataVault.key
+-r--------  1 OpenXPKI_DataVault.pass
+-rwxrwxrwx  1 OpenXPKI_Issuing_CA.crt
+-rw-r--r--  1 OpenXPKI_Issuing_CA.key
+-r--------  1 OpenXPKI_Issuing_CA.pass
+-rwxrwxrwx  1 OpenXPKI_Root_CA.crt
+-rw-r--r--  1 OpenXPKI_Root_CA.key
+-r--------  1 OpenXPKI_Root_CA.pass
+-rw-r--r--  1 README.md
+lrwxrwxrwx  1 ca-signer-1.pem -> OpenXPKI_Issuing_CA.key
 ```
-5. Add symbolic links for vault and
-5. Create container instance
+w5. Create container instance
 ```
 sudo docker-compose up
 ```
@@ -63,7 +62,7 @@ openxpkiadm alias --realm nmos --token datasafe --identifier `openxpkiadm certif
 ```
 7. If import successful database the database should look like this
 ```
-$ openxpkiadm alias --realm democa
+$ openxpkiadm alias --realm nmos
 === functional token ===
 scep (scep):
 Alias     : scep-1
