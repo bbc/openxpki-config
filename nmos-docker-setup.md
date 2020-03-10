@@ -48,7 +48,7 @@ ln -s OpenXPKI_Issuing_CA.key ca-signer-1.pem
 -rw-r--r--  1 README.md
 lrwxrwxrwx  1 ca-signer-1.pem -> OpenXPKI_Issuing_CA.key
 ```
-w5. Create container instance
+5. Create container instance
 ```
 sudo docker-compose up
 ```
@@ -97,8 +97,8 @@ upcoming root ca:
 sudo docker-compose restart
 ```
 
-
 **Adding Externally Trusted CA, for Client verification**
+
 1. Append certificates to the `openxpki-config/externallyTrustedCAs/external.ca.certs.pem`
 2. Restart `openxpki-client` for changes to be imported
 ```
@@ -107,15 +107,27 @@ sudo docker-compose restart openxpki-client
 
 
 **Bug fixes, should be fixed when docker image updated**
+
 1. Change permissions of OpenXPKI logs folder `/var/log/openxpki/`, as EST endpoint cannot start without creating a log file
 ```
 sudo docker-compose exec openxpki-client /bin/bash
 chown -R www-data /var/log/openxpki
 chgrp -R openxpki /var/log/openxpki
 ```
-2. Enable re-enroll endpoint & exporting of TLS Certificate chain of trust
+2. Enable re-enroll endpoint
 ```
 sudo docker-compose exec openxpki-client /bin/bash
 cp /etc/openxpki/est.fcgi /usr/lib/cgi-bin/est.fcgi
 ```
 OpenXPKI is now ready to accept EST requests
+
+**Certificates showing as offline in Web UI**
+
+If the CA is showing as Offline is Web UI, do the following to diagnose the problem
+1. Log into container and check the `catchall.log` for errors
+2. If OpenXPKI failed to open cert check the file permissions in `/etc/openxpki/ca`
+    * Can be changed to `openxpki`
+```
+chgrp -R openxpki /etc/openxpki/ca
+```
+3. Check password for certificate private key in `/etc/openxpki/config.d/realm/nmos/crypto.yaml`

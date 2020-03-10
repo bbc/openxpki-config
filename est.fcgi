@@ -231,7 +231,7 @@ while (my $cgi = CGI::Fast->new()) {
         $log->trace(Dumper $workflow->{context}) if ($log->is_trace);
 
         my $cert_identifier = $workflow->{context}->{cert_identifier};
-        $out = $client->run_command('get_chain',{
+        $out = $client->run_command('get_cert',{
             format => 'PEM',
             start_with => $cert_identifier,
             bundle => 1,

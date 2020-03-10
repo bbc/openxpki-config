@@ -33,3 +33,6 @@ and put the name of the realm in the file system/realms.yaml.
 A demo realm named "democa" is part of the repository. It is recommended to
 not use this for a production system.
 
+## OpenXPKI Setup for NMOS
+[NMOS Docker Setup](nmos-docker-setup.md)
+
