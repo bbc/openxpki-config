@@ -27,7 +27,7 @@ state:
 
 
     # Determine the type of request
-    # inital anonymous = self signed (key and subject)
+    # initial anonymous = self signed (key and subject)
     # initial on behalf = signed by other entity
     # self signed renewal = same subject but other key
     SIGNED_REQUEST:

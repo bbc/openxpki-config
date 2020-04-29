@@ -60,7 +60,7 @@ extensions:
 
         cdp:
             critical: 0
-            uri: http://localhost/cacrl.crt
-            ca_uri: http://localhost/cacrl.crt
+            uri: http://crl.workshop.nmos.tv:5007/intermediate.crl.pem
+            ca_uri: http://crl.workshop.nmos.tv:5007/intermediate.crl.pem
      # end of netscape section
 
