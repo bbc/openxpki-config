@@ -360,13 +360,11 @@ acl:
         attribute: 1
         context: 1
 
-
-
     System:
-        creator: self
-
-    SmartCard:
-        creator: self
+        creator: any
+        fail: 1
+        resume: 1
+        wakeup: 1
 
     User:
         creator: self

@@ -64,6 +64,7 @@ action:
           - run_in_background
           - crl_validity
           - ca_alias
+          - crl_profile
 
     create_ca_list:
         class: OpenXPKI::Server::Workflow::Activity::CRLIssuance::CreateQueue
@@ -106,10 +107,6 @@ condition:
           test: $context->{ca_alias}
 
 field:
-    ca_alias:
-        name: ca_alias
-        type: text
-
     force_issue:
         label: I18N_OPENXPKI_UI_WORKFLOW_FIELD_FORCE_ISSUE_LABEL
         name: force_issue
@@ -130,6 +127,10 @@ field:
         name: crl_validity
         type: server
 
+    crl_profile:
+        name: crl_profile
+        type: server
+
 acl:
     Anonymous:
         creator: self
@@ -147,9 +148,12 @@ acl:
         attribute: 1
         context: 1
 
-
     System:
-        creator: self
+        creator: any
+        fail: 1
+        resume: 1
+        wakeup: 1
+
 
     User:
         creator: self

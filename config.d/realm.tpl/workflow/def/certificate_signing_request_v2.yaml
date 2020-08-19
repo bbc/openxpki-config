@@ -144,7 +144,7 @@ state:
         autorun: 1
         action:
           - global_noop > CHECK_POLICY_VIOLATION ? pending_notification_send
-          - send_pending_notification flag_pending_notification_send > CHECK_POLICY_VIOLATION ?  !pending_notification_send
+          - notify_pending flag_pending_notification_send > CHECK_POLICY_VIOLATION ?  !pending_notification_send
 
     NOTIFY_REJECT:
         autorun: 1
@@ -382,7 +382,7 @@ state:
         autorun: 1
         action:
           - global_noop > ENTER_KEY_PASSWORD ? server_key_generation
-          - global_noop2 > CHECK_POLICY_VIOLATION ? !server_key_generation
+          - global_noop2 > NOTIFY_CSR_PENDING ? !server_key_generation
 
     ENTER_KEY_PASSWORD:
         label: I18N_OPENXPKI_UI_WORKFLOW_STATE_CSR_ENTER_KEY_PASSWORD_LABEL
@@ -400,7 +400,7 @@ state:
     KEY_GENERATED:
         autorun: 1
         action:
-          - generate_pkcs10 global_store_pkey_in_datapool > CHECK_POLICY_VIOLATION ? has_privkey_and_password_in_context
+          - generate_pkcs10 global_store_pkey_in_datapool > NOTIFY_CSR_PENDING ? has_privkey_and_password_in_context
           - global_noop > ENTER_KEY_PASSWORD ? !has_privkey_and_password_in_context
 
 action:
@@ -524,20 +524,29 @@ action:
         param:
             token: certsign
 
+    notify_pending:
+        class: OpenXPKI::Server::Workflow::Activity::Tools::Notify
+        param:
+            message: csr_created
+            _map_notify_to: $cert_info.requestor_email
+
     notify_approval:
         class: OpenXPKI::Server::Workflow::Activity::Tools::Notify
         param:
             message: csr_notify_approval
+            _map_notify_to: $cert_info.requestor_email
 
     notify_issued:
         class: OpenXPKI::Server::Workflow::Activity::Tools::Notify
         param:
             message: cert_issued
+            _map_notify_to: $cert_info.requestor_email
 
     notify_rejected:
         class: OpenXPKI::Server::Workflow::Activity::Tools::Notify
         param:
             message: csr_rejected
+            _map_notify_to: $cert_info.requestor_email
 
     persist_metadata:
         class: OpenXPKI::Server::Workflow::Activity::Tools::PersistCertificateMetadata
@@ -597,11 +606,6 @@ action:
           - cert_subject_style
         param:
             source: USER
-
-    send_pending_notification:
-        class: OpenXPKI::Server::Workflow::Activity::Tools::Notify
-        param:
-            message: csr_created
 
     set_issuer:
         class: OpenXPKI::Server::Workflow::Activity::Tools::SetSource
@@ -941,9 +945,12 @@ acl:
         attribute: 1
         context: 1
 
-
     System:
-        creator: self
+        creator: any
+        fail: 1
+        resume: 1
+        wakeup: 1
+
 
     User:
         creator: self
