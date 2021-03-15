@@ -1,8 +1,11 @@
+landmark:
+    welcome: source!html!file!home
+
 main:
   - key: home
     label: I18N_OPENXPKI_UI_MENU_HOME
     entries:
-      - key:    home!index
+      - key:    source!html!file!home
         label:  I18N_OPENXPKI_UI_MENU_HOME
       - key:    workflow!mine
         label:  I18N_OPENXPKI_UI_MENU_MY_WORKFLOW
@@ -65,9 +68,9 @@ certdetails:
               <a href="mailto:[% mail %]">[% mail %]</a>,
           [% END %]
 
-#
+
 # Workflow search - detail block
 # For a configuration example see "RA Operator.yaml".
 # Setting undef here hides the grey box on the right
-# Do not set this node to se the builtin default
+# Do not set this node to use the builtin default
 wfdetails: ~

@@ -206,7 +206,7 @@ state:
         autorun: 1
         action:
          - notify_approval_pending global_set_error_not_approved > PENDING ? !is_approved is_manual_approval_allowed
-         - notify_request_rejected global_set_error_rejected > FAILURE ? !is_approved !is_manual_approval_allowed
+         - notify_request_rejected global_set_error_not_approved > FAILURE ? !is_approved !is_manual_approval_allowed
          - global_clear_error_code > APPROVED ? is_approved
 
     PENDING:
@@ -288,8 +288,8 @@ state:
           - signer_cert_identifier
 
     FAILURE:
-        label: I18N_OPENXPKI_UI_WORKFLOW_STATE_CSR_FAILURE_LABEL
-        description: I18N_OPENXPKI_UI_WORKFLOW_STATE_CSR_FAILURE_DESC
+        label: I18N_OPENXPKI_UI_WORKFLOW_STATE_FAILURE_LABEL
+        description: I18N_OPENXPKI_UI_WORKFLOW_STATE_FAILURE_DESC
         output:
           - error_code
           - check_policy_subject_duplicate
@@ -322,7 +322,7 @@ action:
             - interface
             - signer_cert
             - comment
-            - hmac
+            - signature
             - _url_params
             - transaction_id
             - profile
@@ -381,7 +381,9 @@ action:
     compare_hmac:
         class: OpenXPKI::Server::Workflow::Activity::Tools::SetContext
         param:
-            _map_is_valid_hmac: "[% IF (context.csr_hmac && context.hmac) && (context.csr_hmac == context.hmac) %]1[% ELSE %]0[% END %]"
+            _map_is_valid_hmac: >
+                [% SET signature = context.signature || context.url_signature;
+                IF (context.csr_hmac && signature) && (context.csr_hmac == signature) %]1[% ELSE %]0[% END %]
 
     calculate_approval_points:
         class: OpenXPKI::Server::Workflow::Activity::Tools::CalculateApprovalPoints
@@ -413,12 +415,11 @@ action:
             _map_cert_subject_style: "[% IF context.cert_subject_style %][% context.cert_subject_style %][% ELSE %]enroll[% END %]"
 
     search_subject_duplicate:
-        class: OpenXPKI::Server::Workflow::Activity::Tools::SearchCertificates
+        class: OpenXPKI::Server::Workflow::Activity::CSR::CheckPolicySubjectDuplicate
         param:
             _map_profile: $cert_profile
             _map_cert_subject: $cert_subject
-            target_key: check_policy_subject_duplicate
-            entity_only: 1
+
 
     queue_duplicates_to_revoke:
         class: OpenXPKI::Server::Workflow::Activity::Tools::SetContext
@@ -785,8 +786,8 @@ field:
         name: profile
         type: server
 
-    hmac:
-        name: hmac
+    signature:
+        name: signature
         type: server
 
 acl:

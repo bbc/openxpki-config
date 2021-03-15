@@ -11,7 +11,7 @@ key:
     alg:
       - rsa
       - ec
-      - dsa
+      #- dsa
 
     # Supported encryption algorithms (as taken by openssl)
     enc:
@@ -24,8 +24,10 @@ key:
     # Definition of key algorithms
     rsa:
         key_length:
+          - 3072
           - 2048
           - 4096
+          - 2048:4096
 
     ec:
         # those names are used for validation and to render the
@@ -54,12 +56,6 @@ key:
           - 2048
           - 4096
 
-    # I18N_OPENXPKI_UI_KEY_ALG_GOST94
-#    gost94:
-    # I18N_OPENXPKI_UI_KEY_ALG_GOST2001
-#    gost2001:
-
-
 validity:
     notafter: +01
 
@@ -75,6 +71,7 @@ extensions:
     basic_constraints:
         critical: 1
         ca: 0
+        # only relevant with ca = 1
         path_length: 0
 
     subject_key_identifier:
@@ -91,7 +88,7 @@ extensions:
         # If the issuer has no subject alternative name, copying returns
         # an empty extension, which is problematic with both RSA SecurId
         # tokens and Cisco devices!
-        copy: 1
+        copy: 0
 
     crl_distribution_points:
         critical: 0
@@ -128,6 +125,7 @@ extensions:
 # I18N_OPENXPKI_UI_KEY_ENC_IDEA
 # I18N_OPENXPKI_UI_KEY_KEY_LENGTH
 # I18N_OPENXPKI_UI_KEY_KEY_LENGTH_2048
+# I18N_OPENXPKI_UI_KEY_KEY_LENGTH_3072
 # I18N_OPENXPKI_UI_KEY_KEY_LENGTH_4096
 # I18N_OPENXPKI_UI_KEY_CURVE_NAME
 # I18N_OPENXPKI_UI_KEY_CURVE_NAME_PRIME192V1

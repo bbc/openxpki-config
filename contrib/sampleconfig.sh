@@ -342,19 +342,22 @@ chown root:${group} ${SSL_REALM}/*.${CERTIFICATE_SUFFIX} ${SSL_REALM}/*.${KEY_SU
 echo -n "Starting server before running import ... "
 openxpkictl start
 
+mkdir -p /etc/openxpki/local/keys
+
 # the import command with the --key parameter takes care to copy the key
 # files to the datapool or filesystem locations
 openxpkiadm certificate import --file "${ROOT_CA_CERTIFICATE}"
-openxpkiadm certificate import --file "${DATAVAULT_CERTIFICATE}" --realm "${REALM}" --token datasafe --key ${DATAVAULT_KEY}
+
+openxpkiadm alias --file "${DATAVAULT_CERTIFICATE}" --realm "${REALM}" --token datasafe --key ${DATAVAULT_KEY}
 sleep 1;
-openxpkiadm certificate import --file "${ISSUING_CA_CERTIFICATE}" --realm "${REALM}" --token certsign --key ${ISSUING_CA_KEY}
-openxpkiadm certificate import --file "${SCEP_CERTIFICATE}" --realm "${REALM}" --token scep  --key ${SCEP_KEY}
+openxpkiadm alias --file "${ISSUING_CA_CERTIFICATE}" --realm "${REALM}" --token certsign --key ${ISSUING_CA_KEY}
+openxpkiadm alias --file "${SCEP_CERTIFICATE}" --realm "${REALM}" --token scep  --key ${SCEP_KEY}
 
 echo "done."
 echo ""
 
 # Setup the Webserver
-a2enmod ssl rewrite
+a2enmod ssl rewrite headers
 a2ensite openxpki
 a2dissite 000-default default-ssl
 
@@ -363,7 +366,7 @@ if [ ! -e "/etc/openxpki/tls/chain" ]; then
     cp ${ROOT_CA_CERTIFICATE} /etc/openxpki/tls/chain/
     cp ${ISSUING_CA_CERTIFICATE} /etc/openxpki/tls/chain/
     c_rehash /etc/openxpki/tls/chain/
-fi;
+fi
 
 if [ ! -e "/etc/openxpki/tls/endentity/openxpki.crt" ]; then
     mkdir -m755 -p /etc/openxpki/tls/endentity
@@ -373,7 +376,7 @@ if [ ! -e "/etc/openxpki/tls/endentity/openxpki.crt" ]; then
     openssl rsa -in ${WEB_KEY} -passin file:${WEB_KEY_PASSWORD} -out /etc/openxpki/tls/private/openxpki.pem
     chmod 400 /etc/openxpki/tls/private/openxpki.pem
     service apache2 restart
-fi;
+fi
 
 cp ${ISSUING_CA_CERTIFICATE} /etc/ssl/certs
 cp ${ROOT_CA_CERTIFICATE} /etc/ssl/certs

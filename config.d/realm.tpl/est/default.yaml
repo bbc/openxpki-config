@@ -1,4 +1,5 @@
-    qqwwqlabel: Enrollment
+
+    label: Enrollment
 
 authorized_signer:
     rule1:
@@ -22,8 +23,7 @@ authorized_signer:
 
 renewal_period: 000060
 
-# You must set at least one of both options or remove the is_policy_loaded
-# condition in the workflow definition
+# for an explanation of the policy options have a look at rpc/enroll.yaml
 policy:
     # Authentication Options
     # Initial requests need ONE authentication.
@@ -68,6 +68,7 @@ policy:
     allow_replace: 1
     export_certificate: chain
 
+
 profile:
     cert_profile: tls_nmos
     cert_subject_style: enroll
@@ -79,7 +80,7 @@ profile:
 
 eligible:
     initial:
-        value: 1
+        value: 0
 
     renewal:
         value: 1

@@ -17,6 +17,12 @@ digest: sha256
 increasing_serials: 1
 randomized_serial_bytes: 8
 
+# Sets the openssl string_mask attribute, utf8only is the default which
+# creates certificates using UTF8STRING for all DN components according
+# to RFC2459. Some older implementations expect PRINTABLESTRING for the
+# CN/DN which can be enforced by string_mask: nombstr
+# string_mask: utf8only
+
 # publish certificates to this connector (as defined at publishing.entity)
 publish:
   - ldap
@@ -97,6 +103,7 @@ extensions:
     basic_constraints:
         critical: 1
         ca: 0
+        # only relevant with ca = 1
         path_length: 0
 
     key_usage:
@@ -138,7 +145,7 @@ extensions:
         # If the issuer has no subject alternative name, copying returns
         # an empty extension, which is problematic with both RSA SecurId
         # tokens and Cisco devices!
-        copy: 1
+        copy: 0
 
 
     crl_distribution_points:

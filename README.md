@@ -50,21 +50,21 @@ Open `config.d/system/realms.yaml` and add your realms.
 For each realm, create a corresponding directory in `config.d/realm/`, for a test drive you can just add a symlink to `realm.tpl`, for a production setup we recommend to create a directory and add the basic artefacts as follows:
 
 ```bash
-mkdir workflow profile notification
+mkdir workflow workflow/def profile notification 
 ln -s ../../realm.tpl/api/
 ln -s ../../realm.tpl/auth/
 ln -s ../../realm.tpl/crl/
 ln -s ../../realm.tpl/crypto.yaml
 ln -s ../../realm.tpl/uicontrol/
-ln -s ../../system.yaml
 cp ../../realm.tpl/profile/default.yaml profile/
 ln -s ../../../realm.tpl/profile/template/ profile/
 cp ../../realm.tpl/notification/smtp.yaml.sample notification/smtp.yaml
 ln -s ../../../realm.tpl/workflow/global workflow/
 ln -s ../../../realm.tpl/workflow/persister.yaml workflow/
 (cd workflow/def/ && find ../../../../realm.tpl/workflow/def/ -type f | xargs -L1 ln -s)
-# In most cases you do not need all workflows and we recommend to removethem
+# In most cases you do not need all workflows and we recommend to remove them
 # those items are rarely used
+cd workflow/def
 rm certificate_export.yaml certificate_revoke_by_entity.yaml report_list.yaml
 # if you dont plan to use EST remove those too
 rm est_cacerts.yaml est_csrattrs.yaml
@@ -76,6 +76,10 @@ We recommend to add the "vanilla" files to the repository immediately after copy
 git -C /etc/openxpki add config.d/
 git commit -m "Initial commit with Realms"
 ```
+
+#### User Home Page
+
+The default configuration has a static HTML page set as the home for the `User` role. The code for this page must be manually placed to `/var/www/static/<realm>/home.html`, an example can be found in the `contrib` directory. If you don't want a static page, remove the `welcome` and `home` items from the `uicontrol/_default.yaml`.
 
 ### Define Profiles
 

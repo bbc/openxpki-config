@@ -30,7 +30,7 @@ style:
 
     enroll:
         subject:
-            dn: CN=[% serial %],DC=Test Deployment,DC=OpenXPKI,DC=org
+            dn: CN=[% CN.0 %],DC=Test Deployment,DC=OpenXPKI,DC=org
 
 
 # Profile extensions - set 0/1 as needed
@@ -48,7 +48,7 @@ extensions:
         decipher_only:     0
 
     extended_key_usage:
-        critical:         1
+        critical:         0
         client_auth:      1
         server_auth:      0
         email_protection: 0
